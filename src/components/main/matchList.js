@@ -1,8 +1,22 @@
+import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
+import SingleMatch from "./maches/singleMatch"
 
-const MatchList = () => {
+const MatchList = ({ teamSearch }) => {
+  const [toDaysMatches, setToDaysMatches] = useState([])
   const selectedMatch = useSelector(state => state.match)
   const { selectedDate } = useSelector(state => state.date)
+  const selectedLeague = useSelector(state => state.match[selectedDate].selectedLeague)
+
+  useEffect(() => {
+    if (selectedLeague) {
+      setToDaysMatches(selectedMatch[selectedDate].match.filter(match => match.league.id === selectedLeague))
+    } else if (teamSearch && teamSearch.length > 2) {
+      setToDaysMatches(selectedMatch[selectedDate].match.filter(match => match.teams.home.name.toUpperCase().includes(teamSearch.toUpperCase()) || match.teams.away.name.toUpperCase().includes(teamSearch.toUpperCase())))
+    } else {
+      setToDaysMatches(selectedMatch[selectedDate].match)
+    }
+  }, [selectedLeague, selectedMatch, selectedDate, teamSearch])
 
   return (
     <div className="col bg-white mt-2 rounded-3 shadow-sm p-2">
@@ -13,9 +27,9 @@ const MatchList = () => {
           </div>
         </div>
       ) : (
-        selectedMatch[selectedDate].match.map(match => (
-          <div className="col" key={match.fixture.id}>
-            {match.league.country + ":" + match.teams.home.name + " : " + match.teams.away.name}
+        toDaysMatches.map((match, index) => (
+          <div key={index}>
+            <SingleMatch match={match} oldMatch={index === 0 ? false : toDaysMatches[index - 1]} selectedDate={selectedDate} selectedLeague={selectedLeague} />
           </div>
         ))
       )}

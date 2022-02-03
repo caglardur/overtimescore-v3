@@ -1,29 +1,29 @@
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { Routes, Route, Navigate } from "react-router-dom"
 
 import Footer from "./components/footer"
+import LeagueDetail from "./components/leagueDetail"
 import LeftBar from "./components/leftBar"
 import Main from "./components/main"
-
-import { GetMatchAction } from "./redux/action/getMatchAction"
+import MatchDetail from "./components/matchDetail"
+import ScrollToTop from "./scrollToTop"
 
 const App = () => {
-  const dispatch = useDispatch()
-  const selectedDate = useSelector(state => state.date)
-
-  useEffect(() => {
-    dispatch(GetMatchAction(selectedDate))
-  }, [dispatch, selectedDate])
-
   return (
-    <div className="App container mt-3" style={{ maxWidth: "960px" }}>
-      <div className="row">
-        <div className="col" style={{ maxWidth: "260px" }}>
+    <div className="App container" style={{ maxWidth: "960px" }}>
+      <div className="row mt-3">
+        <div className="col overflow-auto sticky-top d-none d-lg-block" style={{ maxWidth: "260px", maxHeight: "95vh" }}>
           <LeftBar />
         </div>
         <div className="col">
           <div className="col">
-            <Main />
+            <ScrollToTop>
+              <Routes>
+                <Route index exact path="/" element={<Main />} />
+                <Route path="match/:matchId" element={<MatchDetail />} />
+                <Route path="league/:leagueId" element={<LeagueDetail />} />
+                <Route path="*" element={<Navigate to="/" />} />
+              </Routes>
+            </ScrollToTop>
           </div>
           <div className="col">
             <Footer />
