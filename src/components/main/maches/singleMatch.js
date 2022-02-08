@@ -18,17 +18,17 @@ const SingleMatch = ({ match, oldMatch, selectedDate, selectedLeague }) => {
   return (
     <div className="col">
       {!sameLeague && (
-        <div className="col p-2 my-3">
+        <div className="col p-1 my-3">
           <Link to={"/league/" + match.league.id}>
             <div className="row align-items-center">
               <div className="col-auto">
                 <img src={match.league.flag ? match.league.flag : "/world.png"} alt={match.league.country} className="img-fluid rounded" style={{ height: "26px" }} />
               </div>
               <div type="button" className="col text-uppercase">
-                <div className="col" style={{ fontSize: "11px" }}>
+                <div className="col" style={{ fontSize: "10px" }}>
                   {match.league.country}
                 </div>
-                <div className="col fw-bold" style={{ fontSize: "14px" }}>
+                <div className="col fw-bold" style={{ fontSize: "12px" }}>
                   {match.league.name}
                 </div>
               </div>
@@ -46,24 +46,24 @@ const SingleMatch = ({ match, oldMatch, selectedDate, selectedLeague }) => {
         </div>
       )}
       <Link to={"match/" + matchId}>
-        <div type="button" className="col mb-2" style={{ fontSize: "14px" }}>
+        <div type="button" className="col mb-2 bg-light p-1 rounded shadow-sm" style={{ fontSize: "14px" }}>
           <div className="row align-items-center">
-            <div className="col text-end">{match.teams.home.name}</div>
+            <div className="col text-end text-uppercase">{match.teams.home.name}</div>
             {itsOver ? (
               <div className="col-auto text-center fw-bold">{match.score.fulltime.home + ":" + match.score.fulltime.away}</div>
             ) : (
-              <div className="col-auto opacity-50 text-center" style={{ fontSize: "12px" }}>
+              <div className="col-auto opacity-50 text-center" style={{ fontSize: "10px" }}>
                 <FontAwesomeIcon icon={faClock} />
               </div>
             )}
-            <div className="col">{match.teams.away.name}</div>
+            <div className="col text-uppercase">{match.teams.away.name}</div>
           </div>
           {itsOver ? (
-            <div className="col text-center opacity-50" style={{ fontSize: "12px" }}>
+            <div className="col text-center opacity-50" style={{ fontSize: "10px" }}>
               FULL TIME
             </div>
           ) : (
-            <div className="col text-center opacity-50" style={{ fontSize: "12px" }}>
+            <div className="col text-center opacity-50" style={{ fontSize: "10px" }}>
               {hourAndMin}
             </div>
           )}

@@ -28,19 +28,19 @@ const SingleNextMatch = ({ match, beforeMatch }) => {
         </div>
       )}
       <Link to={"/match/" + matchId}>
-        <div type="button" className="col mb-2" style={{ fontSize: "14px" }}>
+        <div type="button" className="col mb-2 bg-light p-1 rounded shadow-sm" style={{ fontSize: "14px" }}>
           <div className="row align-items-center">
             <div className="col text-end">{match.teams.home.name}</div>
             {itsOver ? (
               <div className="col-auto text-center fw-bold">{match.score.fulltime.home + ":" + match.score.fulltime.away}</div>
             ) : (
-              <div className="col-auto opacity-50 text-center" style={{ fontSize: "12px" }} data-bs-toggle="tooltip" data-bs-placement="top" title={match.fixture.status.long}>
+              <div className="col-auto opacity-50 text-center" style={{ fontSize: "10px" }} data-bs-toggle="tooltip" data-bs-placement="top" title={match.fixture.status.long}>
                 {match.fixture.status.short === "PST" ? <FontAwesomeIcon icon={faExclamationTriangle} /> : <FontAwesomeIcon icon={faClock} />}
               </div>
             )}
             <div className="col">{match.teams.away.name}</div>
           </div>
-          <div className="col text-center opacity-50" style={{ fontSize: "12px" }}>
+          <div className="col text-center opacity-50" style={{ fontSize: "10px" }}>
             {itsOver ? "FULL TIME" : hourAndMin}
           </div>
         </div>

@@ -2,7 +2,7 @@ import SingleNextMatch from "./singleNextMatch"
 
 const NextMatches = ({ nextMatches }) => {
   return (
-    <div className="col">
+    <div className="col p-2">
       {nextMatches.length === 0 && <div className="col text-center my-4">not found</div>}
       {nextMatches.map((match, index) => (
         <div className="col" key={index}>

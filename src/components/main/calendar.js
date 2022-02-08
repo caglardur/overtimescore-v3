@@ -29,10 +29,8 @@ const Calendar = ({ teamSearch, setTeamSearch }) => {
           </div>
         ))}
       </div>
-      <div className="row border-top mt-3 justify-content-evenly align-items-center text-center p-2">
-        <div className="col"></div>
-        <div className="col"></div>
-        <div className="col">
+      <div className="row border-top mt-3 justify-content-end align-items-center text-center p-2">
+        <div className="col-auto">
           <div className="form-group position-relative rounded-3 overflow-hidden">
             <input type="text" className="form-control border-0 p-1 bg-light" value={teamSearch || ""} placeholder="team name..." onChange={e => setTeamSearch(e.target.value)} />
             <div className="position-absolute top-50 translate-middle-y" style={{ right: "5px" }}>
