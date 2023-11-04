@@ -1,16 +1,23 @@
 import axios from "axios"
+import moment from "moment"
 
 import { setMatch } from "../matchReducer"
+
 
 export const GetMatchAction = ({ selectedDate, nextMatches }) => {
   return async dispatch => {
     const getMatches = async () => {
       const canceledMatchCode = ["SUSP", "INT", "PST", "CANC", "ABD", "AWD", "WO"]
       const date = new Date(new Date().setDate(new Date().getDate() + selectedDate - 2)).toLocaleString()
-
-      const fetchYear = date.slice(6, 10)
-      const fetchMonth = date.slice(3, 5)
-      const fetchDay = date.slice(0, 2)
+      const momentDate = moment(date)
+      
+      // const fetchYear = date.slice(6, 10)
+      // const fetchMonth = date.slice(3, 5)
+      // const fetchDay = date.slice(0, 2)
+      const fetchYear = momentDate.year()
+      const fetchMonth = momentDate.month()
+      const fetchDay = momentDate.day()
+      
       const response = await axios(process.env.REACT_APP_DB_HOST + "matchesByDate/" + fetchYear + "-" + fetchMonth + "-" + fetchDay + "/m180")
       if (response.data.matches) {
         response.data.matches.sort((a, b) => {
